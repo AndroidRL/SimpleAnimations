@@ -6,7 +6,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "animation.almonten.koola"
+        applicationId "animation.almonten.koolu"
         minSdk 21
         targetSdk 33
         versionCode 1
