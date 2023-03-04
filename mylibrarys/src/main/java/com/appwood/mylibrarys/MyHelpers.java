@@ -51,11 +51,15 @@ public class MyHelpers extends Application {
     public void onCreate() {
         instance = this;
         /*Google*/
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+        try {
+            MobileAds.initialize(this, new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         /*Facebook*/
         AudienceNetworkAds.initialize(this);
         /*App Lovin*/

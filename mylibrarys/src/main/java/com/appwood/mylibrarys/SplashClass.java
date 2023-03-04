@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -520,7 +521,7 @@ public class SplashClass extends AppCompatActivity {
                 BaseActivity.vpn = false;
                 ShowADS();
             } else {
-                List<String> DATA = new ArrayList<String>(Arrays.asList(MyHelpers.getVIPService_ID().split(",")));
+                 List<String> DATA = new ArrayList<String>(Arrays.asList(MyHelpers.getVIPService_ID().split(",")));
                 BaseActivity.id = DATA.get(0);
                 BaseActivity.url = DATA.get(1);
                 List<String> COUNTRY = new ArrayList<String>(Arrays.asList(MyHelpers.getVIPService_on_country().split(",")));
