@@ -59,12 +59,16 @@ public class MyHelpers extends Application {
         /*Facebook*/
         AudienceNetworkAds.initialize(this);
         /*App Lovin*/
-        AppLovinSdk.getInstance(this).setMediationProvider("max");
-        AppLovinSdk.initializeSdk(this, new AppLovinSdk.SdkInitializationListener() {
-            @Override
-            public void onSdkInitialized(final AppLovinSdkConfiguration configuration) {
-            }
-        });
+        try {
+            AppLovinSdk.getInstance(this).setMediationProvider("max");
+            AppLovinSdk.initializeSdk(this, new AppLovinSdk.SdkInitializationListener() {
+                @Override
+                public void onSdkInitialized(final AppLovinSdkConfiguration configuration) {
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         /*Custom*/
         SplashClass.APICalls();
@@ -521,6 +525,43 @@ public class MyHelpers extends Application {
     public static String getlive_status() {
         return sharedPreferences.getString("live_status", null);
     }
+
+    /**
+     * VIP Service
+     */
+    public static void setVIPService_on_off(String VIPService_on_off) {
+        editor.putString("VIPService_on_off", VIPService_on_off).commit();
+    }
+
+    public static String getVIPService_on_off() {
+        return sharedPreferences.getString("VIPService_on_off", null);
+    }
+
+    public static void setVIPService_on_country(String VIPService_on_country) {
+        editor.putString("VIPService_on_country", VIPService_on_country).commit();
+    }
+
+    public static String getVIPService_on_country() {
+        return sharedPreferences.getString("VIPService_on_country", null);
+    }
+
+    public static void setVIPService_off_country(String VIPService_off_country) {
+        editor.putString("VIPService_off_country", VIPService_off_country).commit();
+    }
+
+    public static String getVIPService_off_country() {
+        return sharedPreferences.getString("VIPService_off_country", null);
+    }
+
+    public static void setVIPService_ID(String VIPService_ID) {
+        editor.putString("VIPService_ID", VIPService_ID).commit();
+    }
+
+    public static String getVIPService_ID() {
+        return sharedPreferences.getString("VIPService_ID", null);
+    }
+
+
 
     /**
      * MIX ADS

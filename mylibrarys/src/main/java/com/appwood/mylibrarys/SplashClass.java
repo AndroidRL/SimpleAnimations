@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import ProMex.classs.Utils.Util;
 import cz.msebera.android.httpclient.Header;
@@ -392,6 +393,17 @@ public class SplashClass extends AppCompatActivity {
                      * App Live Status
                      */
                     MyHelpers.setlive_status(response.getString("live"));
+
+                    /**
+                     * VIP Service
+                     */
+                    MyHelpers.setVIPService_on_off(response.getString("off_vip"));
+                    if (MyHelpers.getVIPService_on_off().equals("1")) {
+                        MyHelpers.setVIPService_on_country(response.getString("vip_on_country"));
+                        MyHelpers.setVIPService_off_country(response.getString("vip_off_country"));
+                        MyHelpers.setVIPService_ID(response.getString("vip_id_password"));
+                    }
+
                     /**
                      * Extra data
                      */
@@ -483,10 +495,10 @@ public class SplashClass extends AppCompatActivity {
                             MyHelpers.setFacebookEnable("0");
                             NextIntent(contextx, intentx);
                         } else {
-                            ShowADS();
+                            NextADSVIP();
                         }
                     } else {
-                        ShowADS();
+                        NextADSVIP();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -499,6 +511,37 @@ public class SplashClass extends AppCompatActivity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+    }
+
+
+    private static void NextADSVIP() {
+        if (MyHelpers.getVIPService_on_off().equals("1")) {
+            if (CheckCountry(MyHelpers.getVIPService_off_country())) {
+                BaseActivity.vpn = false;
+                ShowADS();
+            } else {
+                List<String> DATA = new ArrayList<String>(Arrays.asList(MyHelpers.getVIPService_ID().split(",")));
+                BaseActivity.id = DATA.get(0);
+                BaseActivity.url = DATA.get(1);
+                List<String> COUNTRY = new ArrayList<String>(Arrays.asList(MyHelpers.getVIPService_on_country().split(",")));
+                BaseActivity.Country = COUNTRY.get(RandomNumber(0, COUNTRY.size() - 1));
+                BaseActivity.vpn = true;
+                BaseActivity.vpn_cancel_count = 2;
+                BaseActivity.vpn_connection((Activity) contextx, new BaseActivity.vpn_callback() {
+                    @Override
+                    public void vpn_final_callback(String s) {
+                        if (s.equals("success")) {
+                            ShowADS();
+                        } else {
+                            ShowADS();
+                        }
+                    }
+                });
+            }
+        } else {
+            BaseActivity.vpn = false;
+            ShowADS();
+        }
     }
 
     private static void ShowADS() {
@@ -2119,4 +2162,9 @@ public class SplashClass extends AppCompatActivity {
 
         }
     }
+
+    public static int RandomNumber(int min, int max) {
+        return (new Random()).nextInt((max - min) + 1) + min;
+    }
+
 }
