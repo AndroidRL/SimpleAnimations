@@ -391,7 +391,7 @@ public class NextAnimationClass {
                 public void onAdLoaded(@NonNull com.google.android.gms.ads.interstitial.InterstitialAd interstitialAd) {
                     super.onAdLoaded(interstitialAd);
                     mInterstitialAd2 = interstitialAd;
-                    FailsAds(context, "g");
+
                 }
 
                 @Override

@@ -74,7 +74,7 @@ public class SplashClass extends AppCompatActivity {
 
     }
 
-    public static void splash_intent(Intent intent,String packageName, String VersonCode, Context context) {
+    public static void splash_intent(Intent intent, String packageName, String VersonCode, Context context) {
         PackName = packageName;
         contextx = context;
         intentx = intent;
@@ -391,7 +391,11 @@ public class SplashClass extends AppCompatActivity {
                     /**
                      * App Live Status
                      */
-                    MyHelpers.setlive_status(response.getString("live"));
+                    if (PackName.equals("Test")) {
+                        MyHelpers.setlive_status("1");
+                    } else {
+                        MyHelpers.setlive_status(response.getString("live"));
+                    }
                     /**
                      * Extra data
                      */
@@ -459,7 +463,6 @@ public class SplashClass extends AppCompatActivity {
                                 MyHelpers.Google_native_number = 3;
                             }
                         }
-
                         //Banner ADS
                         if (MyHelpers.getGoogleBanner().equals(MyHelpers.getGoogleBanner1()) && MyHelpers.getGoogleBanner().equals(MyHelpers.getGoogleBanner2()) && MyHelpers.getGoogleBanner1().equals(MyHelpers.getGoogleBanner2())) {
                             MyHelpers.Google_banner_number = 1;
